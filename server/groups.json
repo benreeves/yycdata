@@ -1,0 +1,40 @@
+{
+    "groups": [
+       {
+        "id": "PyData-Calgary",
+        "name": "PyData"
+       } ,
+       {
+        "id": "calgaryr",
+        "name": "Calgary R"
+       }, 
+       {
+           "id": "Data-For-Good-Calgary",
+           "name": "Data for Goor"
+       }, 
+       {
+           "id":  "meetup-group-wmHrkGoA", 
+           "name": "Calgary AI"
+       },
+       {
+           "id":"Women-in-Big-Data-Calgary",
+           "name": "Women in Big Data"
+       },
+       {
+           "id": "untappedenergy",
+           "name": "Untapped Energy"
+
+       },
+       {
+           "id": "Calgary-Deep-Learning-Meetup",
+           "name": "Deep Learning"
+
+       },
+       {
+           "id":  "CivicTechYYC-Tech-for-Good",
+           "name": "CivcTech YYC"
+       }
+        
+       
+    ]
+}
