@@ -8,7 +8,78 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.site-btn {
+	position: relative;
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 12px;
+	min-width: 135px;
+	font-weight: 600;
+	padding: 18px 10px 20px;
+	color: #222121;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	text-align: center;
+	border-top: 2px solid #222121;
+	border-bottom: 2px solid #222121;
+}
+
+.site-btn:after {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 2px;
+	bottom: 2px;
+	left: 0;
+	background: #222121;
+}
+
+.site-btn.light {
+	color: #fff;
+	border-top: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+}
+
+.site-btn.light:after {
+	background: #fff;
+}
+
+.site-btn.light:hover {
+	color: #fff;
+}
+
+.site-btn:hover {
+	color: #222121;
+}
+
+.yyc-bg-full {
+  background: url('/yyc.jpg') no-repeat center center fixed;
+  height: 90vh;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.sp-title {
+	font-size: 30px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 6px;
+}
+
+.yyc-red {
+  background-color: #c8102e !important
+}
+
+.landing-content {
+  height: 100%;
 }

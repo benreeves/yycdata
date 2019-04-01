@@ -39,6 +39,32 @@ server.route({
 // Route to get events for a specific group by ID.
 server.route({
 	method: 'GET',
+	path: '/groups/{groupId}',
+	handler: (request, reply) => {
+		// Is this a valid group?
+		const groupId = request.params.groupId;
+
+		if (isValid(groupId)) {
+			// This is a group we know, about so let's call Meetup and get its events...
+			Request.get({
+				url: `${MEETUP_API_BASE_URL}/${groupId}?key=${MEETUP_API_KEY}&sign=true&photo-host=public&page=20&sign=true`,
+				json: true
+			},
+			(error, response, body) => {
+				// This handles what comes back from Meetup...
+				reply(body);
+			});
+		} else {
+			// We don't know about that group...
+			reply({});
+		}
+		
+	}
+});
+
+// Route to get events for a specific group by ID.
+server.route({
+	method: 'GET',
 	path: '/events/{groupId}',
 	handler: (request, reply) => {
 		// Is this a valid group?

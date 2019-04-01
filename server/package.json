@@ -1,5 +1,5 @@
 {
-  "name": "uuc-data-api",
+  "name": "yyc-data-api",
   "version": "0.0.1",
   "description": "Meetup Node API",
   "main": "server.js",

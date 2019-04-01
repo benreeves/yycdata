@@ -1,36 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import environment from './environment';
 import Calendar from 'react-big-calendar'
+import Members from './Members'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from 'moment'
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const meetups = [
-  'PyData-Calgary',
-  'calgaryr',
-  'Data-For-Good-Calgary',
-  'meetup-group-wmHrkGoA', //calgary artificial intelligence
-  'Women-in-Big-Data-Calgary',
-  'untappedenergy',
-  'Calgary-Deep-Learning-Meetup',
-  'CivicTechYYC-Tech-for-Good',
-]
-
-const apiRoot = 'http://localhost:8080'
+const apiRoot = environment.apiRoot;
 
 const localizer = Calendar.momentLocalizer(moment)
 
-const EventComponent = (event) => {
-  return (
-    <span><strong>{event.title} </strong></span>
-  )
-}
 
 class MyEvent extends Component {
   constructor(event) {
-    console.log(event)
     super(event)
     this.state = { event: event.event }
   }
@@ -166,7 +151,31 @@ class YYCCalendar extends Component {
 
 
 function Index() {
-  return <h2>Home</h2>;
+  return (
+    <div className="yyc-bg-full">
+      <div className="landing-content">
+        <table style={{height: "inherit"}}>
+          <tbody>
+            <tr>
+              <td class="align-bottom">
+                <div className="row-fluid">
+                  <div className="col offset-2">
+                    <span className="sp-sub-title">Empowering Calgary</span>
+                    <h3 className="sp-title">Calgary Data Science Collective</h3>
+                    <p>
+                      We are focused on bringing education, professional development, and inspiration for all things data
+                    </p>
+                    <Link className="site-btn light" to="/calendar">Upcoming Events</Link>
+                  </div>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
 function About() {
@@ -181,40 +190,39 @@ function AppRouter() {
   return (
     <Router>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark yyc-red">
           <a className="navbar-brand" href="#">YYC Data Collective</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/calendar">YYCCalendar</Link>
+                <Link className="nav-link" to="/calendar">Events</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about/">About</Link>
+                <Link className="nav-link" to="/about">About</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/groups/">Groups</Link>
+                <Link className="nav-link" to="/members">Members</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/groups">Get Involvd</Link>
               </li>
             </ul>
           </div>
 
         </nav>
 
-        <div className="container-fluid">
-          <div className="mt-3">
-
-
-
-            <Route path="/" exact component={Index} />
-            <Route path="/calendar" component={YYCCalendar} />
-            <Route path="/about/" component={About} />
-            <Route path="/groups/" component={Groups} />
-          </div>
+        <div className="app-content">
+          <Route path="/" exact component={Index} />
+          <Route path="/calendar" component={YYCCalendar} />
+          <Route path="/about" component={About} />
+          <Route path="/groups" component={Groups} />
+          <Route path="/members" component={Members} />
         </div>
       </div>
     </Router>
