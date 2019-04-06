@@ -17,5 +17,4 @@
     "request": "^2.81.0"
   },
   "proxy": "http://localhost:8080"
-
 }
