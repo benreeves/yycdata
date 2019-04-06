@@ -8,8 +8,6 @@
     MEETUP_API_KEY = process.env.MEETUP_API_KEY,     // From environment variable
     MEETUP_GROUPS = require('./groups.json');
 
-const API_PORT = 8080;
-
 const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.static(path.join(__dirname, 'client/build')));
