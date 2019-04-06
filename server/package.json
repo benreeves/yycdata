@@ -15,5 +15,7 @@
   "dependencies": {
     "hapi": "^16.5.2",
     "request": "^2.81.0"
-  }
+  },
+  "proxy": "http://localhost:8080"
+
 }
