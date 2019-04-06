@@ -72,85 +72,10 @@ router.get('/events/:groupId', (req, res) => {
 
 })
 
-//const provision = async () => {
-//
-//    await server.register(Inert);
-//
-//    // Route to get all groups.
-//    server.route({
-//        method: 'GET',
-//        path: '/api/groups',
-//        handler: (request, reply) => {
-//            reply(MEETUP_GROUPS.groups);
-//        }
-//    });
-//
-//    // Route to get events for a specific group by ID.
-//    server.route({
-//        method: 'GET',
-//        path: '/api/groups/{groupId}',
-//        handler: (request, reply) => {
-//            // Is this a valid group?
-//            const groupId = request.params.groupId;
-//
-//            if (isValid(groupId)) {
-//                // This is a group we know, about so let's call Meetup and get its events...
-//                Request.get({
-//                    url: `${MEETUP_API_BASE_URL}/${groupId}?key=${MEETUP_API_KEY}&sign=true&photo-host=public&page=20&sign=true`,
-//                    json: true
-//                },
-//                    (error, response, body) => {
-//                        // This handles what comes back from Meetup...
-//                        reply(body);
-//                    });
-//            } else {
-//                // We don't know about that group...
-//                reply({});
-//            }
-//
-//        }
-//    });
-//
-//    // Route to get events for a specific group by ID.
-//    server.route({
-//        method: 'GET',
-//        path: '/api/events/{groupId}',
-//        handler: (request, reply) => {
-//            // Is this a valid group?
-//            const groupId = request.params.groupId;
-//
-//            if (isValid(groupId)) {
-//                // This is a group we know, about so let's call Meetup and get its events...
-//                Request.get({
-//                    url: `${MEETUP_API_BASE_URL}/${groupId}/events?key=${MEETUP_API_KEY}&sign=true&photo-host=public&page=20&sign=true`,
-//                    json: true
-//                },
-//                    (error, response, body) => {
-//                        // This handles what comes back from Meetup...
-//                        reply(body);
-//                    });
-//            } else {
-//                // We don't know about that group...
-//                reply({});
-//            }
-//
-//        }
-//    });
-//
-//    server.route({
-//        method: 'GET',
-//        path: '/',
-//        handler: function (request, h) {
-//
-//            return h.file('index.html');
-//        }
-//    });
-//
-//
-//    await server.start();
-//
-//    console.log('Server running at:', server.info.uri);
-//};
 app.use("/api", router);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 module.exports = app;
