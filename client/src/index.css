@@ -83,3 +83,18 @@ code {
 .landing-content {
   height: 100%;
 }
+
+.meetup-img {
+  max-height: 250px;
+}
+.meetup-img-card-wrapper {
+  min-height: 200px;
+}
+
+.landing-content-bg {
+	color: #fff;
+  background-color:rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  
+  
+}

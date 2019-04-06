@@ -104,33 +104,11 @@ class YYCCalendar extends Component {
         })
     })
 
-    // axios.get(apiRoot + '/events/PyData-Calgary')
-    //   .then(response =>  {
-    //     console.log(response);
-    //     const data = response.data;
-    //     const events = [];
-    //     if(!data.length) return;
-    //     for(let i = 0; i < data.length; i++) {
-    //       const event = data[i];
-    //       const start = moment(event.local_date + " " + event.local_time);
-    //       const end = start.add(event.duration, 'ms');
-
-    //       events.push({
-    //         start: start,
-    //         end: end,
-    //         title: event.name,
-    //         resource: event.venue.name
-
-    //       })
-    //     }
-    //     const newEvents = this.extendEvents(this.state.events, events);
-    //     this.setState({events: newEvents})
-    //   })
   }
 
   render() {
     return (
-      <div>
+      <div className='m-2'>
 
         <h2>Upcoming Events</h2>
         <div className="mt-2">
@@ -141,7 +119,7 @@ class YYCCalendar extends Component {
           defaultView="month"
           events={this.state.events}
           components={{ event: MyEvent }}
-          style={{ height: "100vh" }}
+          style={{ height: "75vh" }}
         />
         </div>
       </div>
@@ -154,18 +132,20 @@ function Index() {
   return (
     <div className="yyc-bg-full">
       <div className="landing-content">
-        <table style={{height: "inherit"}}>
+        <table style={{height: "inherit", width: "100%"}}>
           <tbody>
             <tr>
               <td class="align-bottom">
                 <div className="row-fluid">
+                  <div className="landing-content-bg mb-5">
                   <div className="col offset-2">
                     <span className="sp-sub-title">Empowering Calgary</span>
                     <h3 className="sp-title">Calgary Data Science Collective</h3>
                     <p>
-                      We are focused on bringing education, professional development, and inspiration for all things data
+                      We are focused on bringing education, professional development, and inspiration to Calgary with all things data
                     </p>
                     <Link className="site-btn light" to="/calendar">Upcoming Events</Link>
+                  </div>
                   </div>
                 </div>
 
@@ -210,7 +190,7 @@ function AppRouter() {
                 <Link className="nav-link" to="/members">Members</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/groups">Get Involvd</Link>
+                <Link className="nav-link" to="/groups">Get Involved</Link>
               </li>
             </ul>
           </div>
