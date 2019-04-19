@@ -10,6 +10,7 @@ import {
   NavLink } from 'reactstrap';
 import './App.css';
 import Members from './Members'
+import About from './About'
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -46,56 +47,10 @@ function Index() {
   );
 }
 
-function About() {
-  return <h2>About</h2>;
-}
-
 function Groups() {
   return <h2>Groups</h2>;
 }
 
-// function AppRouter() {
-//   return (
-//     <Router>
-//       <div>
-//         <nav className="navbar navbar-expand-lg navbar-dark bg-dark yyc-red">
-//           <a className="navbar-brand" href="#">YYC Data Collective</a>
-//           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-//             <span className="navbar-toggler-icon"></span>
-//           </button>
-//           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-//             <ul className="navbar-nav mr-auto">
-//               <li className="nav-item">
-//                 <Link className="nav-link" to="/">Home</Link>
-//               </li>
-//               <li className="nav-item">
-//                 <Link className="nav-link" to="/calendar">Events</Link>
-//               </li>
-//               <li className="nav-item">
-//                 <Link className="nav-link" to="/about">About</Link>
-//               </li>
-//               <li className="nav-item">
-//                 <Link className="nav-link" to="/members">Members</Link>
-//               </li>
-//               <li className="nav-item">
-//                 <Link className="nav-link" to="/groups">Get Involved</Link>
-//               </li>
-//             </ul>
-//           </div>
-
-//         </nav>
-
-//         <div className="app-content">
-//           <Route path="/" exact component={Index} />
-//           <Route path="/calendar" component={YYCCalendar} />
-//           <Route path="/about" component={About} />
-//           <Route path="/groups" component={Groups} />
-//           <Route path="/members" component={Members} />
-//         </div>
-//       </div>
-//     </Router>
-//   );
-// };
 
 class AppRouter extends React.Component {
   constructor(props) {
@@ -135,33 +90,6 @@ class AppRouter extends React.Component {
               </Nav>
             </Collapse>
           </Navbar>
-          {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark yyc-red">
-          <a className="navbar-brand" href="#">YYC Data Collective</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/calendar">Events</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/about">About</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/members">Members</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/groups">Get Involved</Link>
-              </li>
-            </ul>
-          </div>
-
-        </nav> */}
-
           <div className="app-content">
             <Route path="/" exact component={Index} />
             <Route path="/calendar" component={YYCCalendar} />

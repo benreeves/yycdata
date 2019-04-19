@@ -1,0 +1,37 @@
+.content-wrapper {
+    text-align: center;
+    display: inline-block;
+}
+
+.no-margin {
+    margin-bottom: 0em;
+}
+
+.yyc-dark {
+  /* background-color: #AA1622 !important; */
+  background-color: #88111b ;
+}
+
+.jumbotron-title {
+  /* color: #c8102e ; */
+  color: #cc737a ;
+  font-weight: 300;
+}
+
+.jumbotron-subtitle {
+  color: whitesmoke;
+}
+
+.background-ultra-light-gray {
+    background-color: #F0F7F7;
+}
+
+.background-darker-light-gray {
+    background-color: #dfeeee;
+}
+
+.vertical-center {
+
+  display: flex;
+  align-items: center;
+}

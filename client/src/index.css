@@ -5,7 +5,8 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	-moz-osx-font-smoothing: grayscale;
+	color: #424A4F;
 }
 
 
@@ -78,6 +79,10 @@ code {
 
 .yyc-red {
   background-color: #c8102e !important
+}
+
+.no-border {
+	border-radius: 0em;
 }
 
 .landing-content {

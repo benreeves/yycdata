@@ -30,7 +30,6 @@ class MyEvent extends Component {
   }
 }
 
-
 class YYCCalendar extends Component {
   constructor(props) {
     super(props);
