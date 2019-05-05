@@ -4,6 +4,7 @@ import environment from './environment';
 import Calendar from 'react-big-calendar'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import './YYCCalendar.css';
+import hardcodeEvents from './hardcode-events';
 import moment from 'moment'
 import {isMobile} from 'react-device-detect';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -124,6 +125,7 @@ class YYCCalendar extends Component {
       Promise.all(requests)
         .then(eventsArrays => {
           let allEvents = eventsArrays.reduce((a, b) => a.concat(b))
+          allEvents = allEvents.concat(hardcodeEvents);
           this.setState({ events: allEvents });
         })
     })
