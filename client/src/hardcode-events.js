@@ -8,8 +8,8 @@ const hardcodeEvents = [{
         groupName: 'Alberta Data Architecture',
         group: 'ADA',
     },
-    start: '2019-05-08T17:00:00',
-    end: '2019-05-08T18:45:00'
+    start: new Date('2019-05-08T17:00:00'),
+    end: new Date('2019-05-08T18:45:00')
 
 }]
 
