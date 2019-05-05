@@ -30,6 +30,10 @@
     background-color: #dfeeee;
 }
 
+.about-img {
+  max-width: 400px;
+  max-height: inherit;
+}
 .vertical-center {
 
   display: flex;

@@ -23,53 +23,57 @@ function About() {
             <div>
                 <div className="row background-ultra-light-gray p-3">
                     <div className="col-lg-5 text-center">
-                        <img src="https://via.placeholder.com/300" alt=""></img>
-                    </div>
-                    <div className="col-lg-7 vertical-center">
-                        <div className="p-4">
-                            <h2>Our Value Statement</h2>
-                            <p>
-                                For Calgary, we aim to expose the inspiring work performed by the various communities in the
-                                city and connect people and organizations with the communities that will aid in their personal
-                                and professional development.
-                            </p>
-                            <br></br>
-                            <p>
-                                For our members, we support them with communication, event planning, funding, and venue securement.
-                                We ensure that our members have access to all the tools they need to bring life to their ideas, ranging
-                                from connecting datathon planners with corporate sponsors to booking coworking spaces for working groups.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div className="row background-darker-light-gray p-3 flex-row-reverse">
-                    <div className="col-lg-5 text-center">
-                        <img src="https://via.placeholder.com/300" alt=""></img>
+                        <img className="about-img" src="stock1.jpg" alt=""></img>
                     </div>
                     <div className="col-lg-7 vertical-center">
                         <div className="p-4">
                             <h2>Our Founding</h2>
                             <p>
-                                We started as a loose collection of community organizations related to data science and
-                                data management. As our communities grew, we realized that we could accomplish more through collaboration
-                                and teamwork. The Collective was born out of a desire to empower the local data communities through
-                                centralized communication, funding, and joint events
-                    </p>
+                                Over a short amount of time, the amount of interest in data science in Calgary has grown exponentially.
+                                Many groups were formed from this interest but we all shared the same goals, vision and strategy.
+                                The Collective was born out of a desire to empower the local data communities through centralized communication,
+                                funding, and joint events. The YYC Data Collective was formed to consolidate this mission and make sure we are
+                                driving towards it. By banding together, we become more visible and influential.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div className="row background-darker-light-gray p-3 flex-row-reverse">
+                    <div className="col-lg-5 text-center">
+                        <img className="about-img" src="/stock2.jpg" alt=""></img>
+                    </div>
+                    <div className="col-lg-7 vertical-center">
+                        <div className="p-4">
+                            <h2>Our Mission</h2>
+                            <p>
+                            Calgary is a dynamic and innovative place with a lot of local talent and activity in the data space.
+                            The goal of every organization in the collective is to drive towards creating a strong foundation 
+                            in data science, machine learning, AI and other related fields. This is accomplished by providing
+                             education opportunities, exposing work that is happening in this city right now, and connecting
+                             talented people.
+                            </p>
+                            <p>
+                            Currently, the main role of the collective is communication. We provide a central platform to learn about this community and
+                            find out what's happening. Long term, the collective hopes to run larger scale events and become a place where people come
+                            to help build additional opportunities in this space.
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div className="row background-ultra-light-gray p-3">
                     <div className="col-lg-5 text-center">
-                        <img src="https://via.placeholder.com/300" alt=""></img>
+                        <img className="about-img" src="/stock3.jpg" alt=""></img>
                     </div>
                     <div className="col-lg-7 vertical-center">
                         <div className="p-4">
                             <h2>Our Members</h2>
                             <p>
-                                We partner with local, Calgary based organizations looking to create positive growth in the
-                                data space. We connect community endeavours with innovative companies and academic institutions
-                                for mutual success. From the largest organizations drawing hundreds of passionate indiviudals with
-                                every event, to the smallest working groups - we embrace them all and help them to achieve their goals
+                                We partner with local, Calgary based organizations looking to create positive growth in the data
+                                space. All of the members of the collective support the mission and long term goals of the 
+                                collective. We connect community endeavours with innovative companies and academic institutions
+                                for mutual success. Going forward, we will help advise, consolidate and facilitate additional efforts in this
+                                space, especially if they are challenging to fit in the existing member framework.
                             </p>
                         </div>
                     </div>

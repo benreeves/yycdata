@@ -84,9 +84,6 @@ class AppRouter extends React.Component {
                 <NavItem>
                   <NavLink href="/members">Members</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink href="/join">Join</NavLink>
-                </NavItem>
               </Nav>
             </Collapse>
           </Navbar>

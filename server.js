@@ -19,11 +19,10 @@ const router = express.Router();
 function isValid(groupId) {
     for (let group of MEETUP_GROUPS.groups) {
         if (group.id === groupId) {
-            return true;
+            return group.name;
         }
     }
-
-    return false;
+    return '';
 }
 
 router.get('/groups', (req, res) => {
@@ -55,7 +54,8 @@ router.get('/events/:groupId', (req, res) => {
     // Is this a valid group?
     const groupId = req.params.groupId;
 
-    if (isValid(groupId)) {
+    const name = isValid(groupId);
+    if (name) {
         // This is a group we know, about so let's call Meetup and get its events...
         Request.get({
             url: `${MEETUP_API_BASE_URL}/${groupId}/events?key=${MEETUP_API_KEY}&sign=true&photo-host=public&page=20&sign=true`,
@@ -63,6 +63,14 @@ router.get('/events/:groupId', (req, res) => {
         },
             (error, response, body) => {
                 // This handles what comes back from Meetup...
+                try {
+                    for (let x of body) {
+                        x.groupName = name;
+                    }
+                }
+                catch(err) {
+                    console.log(err)
+                }
                 res.json(body);
             });
     } else {

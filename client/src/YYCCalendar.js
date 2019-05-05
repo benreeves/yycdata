@@ -3,29 +3,70 @@ import axios from 'axios';
 import environment from './environment';
 import Calendar from 'react-big-calendar'
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import './YYCCalendar.css';
 import moment from 'moment'
+import {isMobile} from 'react-device-detect';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const apiRoot = environment.apiRoot;
 
 const localizer = Calendar.momentLocalizer(moment)
 
-class MyEvent extends Component {
+class Event extends Component {
   constructor(event) {
     super(event)
-    this.state = { event: event.event }
+    this.state = { event: event.event, modal: false }
   }
 
   handleClick = () => {
-    console.log('clicked')
-    window.open(this.state.event.resource.link);
+    this.toggle();
+  }
+  openLink = () => {
+    window.open(this.props.event.resource.link);
   }
 
+  toggle = () => {
+    this.setState({
+      ...this.state,
+      modal: !this.state.modal
+    });
+  }
+}
+
+class CalendarEvent extends Event {
   render = () => {
     return (
       <div onClick={(e) => this.handleClick(e)}>
         <span><strong>{this.state.event.title} </strong></span>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>{this.state.event.title}</ModalHeader>
+          <ModalBody>
+            <ul>
+              <li>Presented by: <span><b>{this.props.event.resource.groupName}</b></span></li>
+              <li>Location: {this.props.event.resource.venue.name}</li>
+              <li>Start: {moment(this.props.event.start).format("dddd, MMMM Do YYYY, h:mm a")}</li>
+              <li>End: {moment(this.props.event.end).format("dddd, MMMM Do YYYY, h:mm a")}</li>
+            </ul>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.openLink}>Event Link</Button>
+            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
       </div>
+    )
+  }
+}
 
+class AgendaEvent extends Event {
+  render = () => {
+    return (
+      <div onClick={(e) => this.handleClick(e)}>
+        <b>{this.state.event.title}</b>
+        <div>Presented by: <span><b>{this.state.event.resource.groupName}</b></span></div>
+        <div>Location: <span><b>{this.state.event.resource.venue.name}</b></span></div>
+        <div><Button outline color="primary" size="sm" onClick={this.openLink}>Link</Button></div>
+      </div>
     )
   }
 }
@@ -33,19 +74,11 @@ class MyEvent extends Component {
 class YYCCalendar extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       events: []
     };
-
     this.setState = this.setState.bind(this);
     this.groups = this.groups.bind(this);
-
-
-  }
-
-  extendEvents = (old, toAdd) => {
-    return old.concat(toAdd);
   }
 
   groups = () => {
@@ -73,16 +106,12 @@ class YYCCalendar extends Component {
             resource: {
               venue: event.venue,
               group: group,
-              link: event.link
-
-            }
-            ,
-
+              link: event.link,
+              groupName: event.groupName
+            },
           })
-
           return events
         }
-
       })
   }
 
@@ -98,24 +127,26 @@ class YYCCalendar extends Component {
           this.setState({ events: allEvents });
         })
     })
-
   }
 
   render() {
     return (
       <div className='m-2'>
-
         <h2>Upcoming Events</h2>
         <div className="mt-2">
-
-        <Calendar
-          localizer={localizer}
-          defaultDate={new Date()}
-          defaultView="month"
-          events={this.state.events}
-          components={{ event: MyEvent }}
-          style={{ height: "75vh" }}
-        />
+          <Calendar
+            localizer={localizer}
+            defaultDate={new Date()}
+            defaultView={isMobile ? "agenda" : "month"}
+            views={['month', 'week', 'agenda']}
+            events={this.state.events}
+            components={{ 
+              month: { event: CalendarEvent },
+              week: { event: CalendarEvent },
+              agenda: { event: AgendaEvent },
+             }}
+            style={{ height: "75vh" }}
+          />
         </div>
       </div>
     );
