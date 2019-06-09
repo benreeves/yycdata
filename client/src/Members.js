@@ -86,6 +86,26 @@ class Members extends Component {
                             </div>
                         </div>
                     </div>
+                    <div className="col-lg-4 col-xl-3 mb-5">
+                        <div className="card h-100">
+                            <div className="meetup-img-card-wrapper">
+                                <img className="card-img-top meetup-img" src="/DAMALogo.png" alt="" />
+                            </div>
+                            <div className="card-body">
+                                <h4 className="card-title">DAMA</h4>
+                                <p className="card-text">
+                                DAMA's mission is to provide a non-profit, vendor-independent association where data professionals 
+                                can go for help and assistance. They aim to To provide the best practice resources such as the DMBoK 
+                                and DM Dictionary of Terms in a mechanism that reaches as many DM professionals as possible and
+                                to create a trusted environment for DM professionals to collaborate and communicate.
+                                They meet the 3rd Thursday of the month at 8AM.
+                                </p>
+                            </div>
+                            <div className="card-footer">
+                                <Button color="primary" onClick={() => this.openLink("http://www.dama-calgary.org/")}>Find Out More!</Button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
