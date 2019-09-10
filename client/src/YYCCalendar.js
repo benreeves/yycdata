@@ -6,12 +6,23 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import './YYCCalendar.css';
 import hardcodeEvents from './hardcode-events';
 import moment from 'moment'
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const apiRoot = environment.apiRoot;
 
 const localizer = Calendar.momentLocalizer(moment)
+
+// class EventSpec {
+//   constructor(title, venue, group, start, end, link) {
+//     this.title = title;
+//     this.venue = venue;
+//     this.group = group;
+//     this.start = start;
+//     this.end = end;
+//     this.link = link;
+//   }
+// }
 
 class Event extends Component {
   constructor(event) {
@@ -23,7 +34,7 @@ class Event extends Component {
     this.toggle();
   }
   openLink = () => {
-    window.open(this.props.event.resource.link);
+    window.open(this.props.event.link);
   }
 
   toggle = () => {
@@ -43,8 +54,8 @@ class CalendarEvent extends Event {
           <ModalHeader toggle={this.toggle}>{this.state.event.title}</ModalHeader>
           <ModalBody>
             <ul>
-              <li>Presented by: <span><b>{this.props.event.resource.groupName}</b></span></li>
-              <li>Location: {this.props.event.resource.venue.name}</li>
+              <li>Presented by: <span><b>{this.props.event.groupName}</b></span></li>
+              <li>Location: {this.props.event.location}</li>
               <li>Start: {moment(this.props.event.start).format("dddd, MMMM Do YYYY, h:mm a")}</li>
               <li>End: {moment(this.props.event.end).format("dddd, MMMM Do YYYY, h:mm a")}</li>
             </ul>
@@ -64,8 +75,8 @@ class AgendaEvent extends Event {
     return (
       <div onClick={(e) => this.handleClick(e)}>
         <b>{this.state.event.title}</b>
-        <div>Presented by: <span><b>{this.state.event.resource.groupName}</b></span></div>
-        <div>Location: <span><b>{this.state.event.resource.venue.name}</b></span></div>
+        <div>Presented by: <span><b>{this.state.event.groupName}</b></span></div>
+        <div>Location: <span><b>{this.state.event.location}</b></span></div>
         <div><Button outline color="primary" size="sm" onClick={this.openLink}>Link</Button></div>
       </div>
     )
@@ -86,10 +97,38 @@ class YYCCalendar extends Component {
     return axios.get(apiRoot + '/groups')
       .then(response => {
         const data = response.data;
-        return data.map(x => x.id);
+        return data;
       });
   }
 
+  // events from google calendar
+  //getEvents = () => {
+  //  return axios.get(apiRoot   + '/events')
+  //    .then(response => {
+  //      const data = response.data;
+  //      const events = [];
+  //      if (!data.length) return [];
+  //      for (let i = 0; i < data.length; i++) {
+  //        const event = data[i];
+  //        const start = moment(event.local_date + " " + event.local_time);
+  //        const end = moment(start).add(event.duration, 'ms');
+  //        events.push({
+  //          start: new Date(start),
+  //          end: new Date(end),
+  //          title: event.name,
+  //          resource: {
+  //            venue: event.venue,
+  //            group: group,
+  //            link: event.link,
+  //            groupName: event.groupName
+  //          },
+  //        })
+  //        return events
+  //      }
+  //    });
+  //}
+
+  // events from meetup api
   getEventsFor = (group) => {
     return axios.get(apiRoot + '/events/' + group)
       .then(response => {
@@ -98,32 +137,33 @@ class YYCCalendar extends Component {
         if (!data.length) return [];
         for (let i = 0; i < data.length; i++) {
           const event = data[i];
-          const start = moment(event.local_date + " " + event.local_time);
-          const end = moment(start).add(event.duration, 'ms');
+          const start = moment(event.start.dateTime);
+          const end = moment(event.end.dateTime);
           events.push({
             start: new Date(start),
             end: new Date(end),
-            title: event.name,
-            resource: {
-              venue: event.venue,
-              group: group,
-              link: event.link,
-              groupName: event.groupName
-            },
+            title: event.title,
+            location: event.location,
+            link: event.link,
+            groupName: event.groupName,
           })
-          return events
         }
+        console.log(events);
+        return events
       })
+      .catch(err => [])
   }
 
   componentDidMount = () => {
     this.setState({
       events: []
     })
-    this.groups().then(groupIds => {
+    this.groups().then(groups => {
+      const groupIds = groups.map(x => x.id);
       let requests = groupIds.map(this.getEventsFor)
       Promise.all(requests)
         .then(eventsArrays => {
+          console.log(eventsArrays);
           let allEvents = eventsArrays.reduce((a, b) => a.concat(b))
           allEvents = allEvents.concat(hardcodeEvents);
           this.setState({ events: allEvents });
@@ -142,11 +182,11 @@ class YYCCalendar extends Component {
             defaultView={isMobile ? "agenda" : "month"}
             views={['month', 'week', 'agenda']}
             events={this.state.events}
-            components={{ 
+            components={{
               month: { event: CalendarEvent },
               week: { event: CalendarEvent },
               agenda: { event: AgendaEvent },
-             }}
+            }}
             style={{ height: "75vh" }}
           />
         </div>

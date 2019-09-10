@@ -11,6 +11,7 @@ import {
 import './App.css';
 import Members from './Members'
 import About from './About'
+import OpportunitiesPage from './Opportunities';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -78,6 +79,9 @@ class AppRouter extends React.Component {
                 <NavItem>
                   <NavLink href="/calendar">Calendar</NavLink>
                 </NavItem>
+                {/* <NavItem>
+                  <NavLink href="/opportunities">Opportunities</NavLink>
+                </NavItem> */}
                 <NavItem>
                   <NavLink href="/about">About</NavLink>
                 </NavItem>
@@ -90,6 +94,7 @@ class AppRouter extends React.Component {
           <div className="app-content">
             <Route path="/" exact component={Index} />
             <Route path="/calendar" component={YYCCalendar} />
+            <Route path="/opportunities" component={OpportunitiesPage} />
             <Route path="/about" component={About} />
             <Route path="/groups" component={Groups} />
             <Route path="/members" component={Members} />

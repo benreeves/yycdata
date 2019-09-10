@@ -1,40 +1,64 @@
 {
     "groups": [
-       {
-        "id": "PyData-Calgary",
-        "name": "PyData"
-       } ,
-       {
-        "id": "calgaryr",
-        "name": "Calgary R"
-       }, 
-       {
-           "id": "Data-For-Good-Calgary",
-           "name": "Data for Goor"
-       }, 
-       {
-           "id":  "meetup-group-wmHrkGoA", 
-           "name": "Calgary AI"
-       },
-       {
-           "id":"Women-in-Big-Data-Calgary",
-           "name": "Women in Big Data"
-       },
-       {
-           "id": "untappedenergy",
-           "name": "Untapped Energy"
-
-       },
-       {
-           "id": "Calgary-Deep-Learning-Meetup",
-           "name": "Deep Learning"
-
-       },
-       {
-           "id":  "CivicTechYYC-Tech-for-Good",
-           "name": "CivcTech YYC"
-       }
-        
-       
+        {
+            "id": "PyData-Calgary",
+            "name": "PyData",
+            "calendarId": "90s98s3rfdp5fu0j9fogqjkp30ltshq1@import.calendar.google.com",
+            "url": "https://www.meetup.com/PyData-Calgary/"
+        },
+        {
+            "id": "calgaryr",
+            "name": "Calgary R",
+            "calendarId": "smuer5qbtn33qjlh3dtvpbas5kudc048@import.calendar.google.com",
+            "url": "https://www.meetup.com/calgaryr/"
+        },
+        {
+            "id": "Data-For-Good-Calgary",
+            "name": "Data for Good",
+            "calendarId": "8ihpm8js1112hqmdshfat8414vcgbf98@import.calendar.google.com",
+            "url": "https://www.meetup.com/Data-For-Good-Calgary/"
+        },
+        {
+            "id": "calgary-ai",
+            "name": "Calgary AI",
+            "calendarId": "lu9999kq2us5fu81afo3gdvq3pinjl34@import.calendar.google.com",
+            "url": "https://www.meetup.com/calgary-ai/"
+        },
+        {
+            "id": "Women-in-Data-Calgary",
+            "name": "Women in Data",
+            "calendarId":"b9sgnavfd8mglk9qus6vcc52gdn2oup1@import.calendar.google.com",
+            "url": "https://www.meetup.com/Women-In-Data-Calgary/"
+        },
+        {
+            "id": "untappedenergy",
+            "name": "Untapped Energy",
+            "calendarId": "n07a659vf3raa9m69h4a0a050st0uusi@import.calendar.google.com",
+            "url": "https://www.meetup.com/untappedenergy/"
+        },
+        {
+            "id": "Calgary-Deep-Learning-Meetup",
+            "name": "Deep Learning",
+            "calendarId": "revdr9ms84cfhcqtc8u1gtsre082h9h6@import.calendar.google.com",
+            "url": "https://www.meetup.com/Calgary-Deep-Learning-Meetup/"
+        },
+        {
+            "id": "CivicTechYYC-Tech-for-Good",
+            "name": "CivcTech YYC",
+            "calendarId": "0m8i8fomirn72b97e6gf7j2psoi5hn77@import.calendar.google.com",
+            "url": "https://www.meetup.com/CivicTechYYC-Tech-for-Good/"
+        },
+        {
+            "id": "DAMA",
+            "name": "DAMA",
+            "calendarId": null,
+            "url": "http://www.dama-calgary.org/"
+        },
+        {
+            "id": "ADA",
+            "name": "ADA",
+            "calendarId": null,
+            "url": "http://albertadataarchitecture.org/"
+        }
     ]
 }
