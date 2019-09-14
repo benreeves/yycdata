@@ -4,6 +4,7 @@ const { google } = require('googleapis');
 const google_creds_key = require('./google-creds.json');
 const uuidv1 = require('uuid/v1');
 const mongo = require('mongodb');
+const moment = require('moment');
 const express = require('express'),
 cors = require('cors'),
 Request = require('request'),
@@ -56,7 +57,8 @@ function getGoogleCalendarEvents(calendarId) {
         }
     });
     return googleCalendarApi.events.list({
-        calendarId: calendarId
+        calendarId: calendarId,
+        timeMin: moment().subtract(30, 'days').toISOString()
     })
     .then(res => {
         return res.data.items.map(item => {
