@@ -7,7 +7,10 @@ import './YYCCalendar.css';
 import hardcodeEvents from './hardcode-events';
 import moment from 'moment'
 import { isMobile } from 'react-device-detect';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Container } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendar } from '@fortawesome/free-solid-svg-icons'
+import events from './services/events-service'
 
 const apiRoot = environment.apiRoot;
 
@@ -34,7 +37,13 @@ class Event extends Component {
     this.toggle();
   }
   openLink = () => {
-    window.open(this.props.event.link);
+    const l = this.props.event.link;
+    if(!l.match(/^http/)) {
+      window.open('http://' + this.props.event.link);
+
+    } else {
+      window.open(this.props.event.link);
+    }
   }
 
   toggle = () => {
@@ -90,106 +99,54 @@ class YYCCalendar extends Component {
       events: []
     };
     this.setState = this.setState.bind(this);
-    this.groups = this.groups.bind(this);
-  }
-
-  groups = () => {
-    return axios.get(apiRoot + '/groups')
-      .then(response => {
-        const data = response.data;
-        return data;
-      });
-  }
-
-  // events from google calendar
-  //getEvents = () => {
-  //  return axios.get(apiRoot   + '/events')
-  //    .then(response => {
-  //      const data = response.data;
-  //      const events = [];
-  //      if (!data.length) return [];
-  //      for (let i = 0; i < data.length; i++) {
-  //        const event = data[i];
-  //        const start = moment(event.local_date + " " + event.local_time);
-  //        const end = moment(start).add(event.duration, 'ms');
-  //        events.push({
-  //          start: new Date(start),
-  //          end: new Date(end),
-  //          title: event.name,
-  //          resource: {
-  //            venue: event.venue,
-  //            group: group,
-  //            link: event.link,
-  //            groupName: event.groupName
-  //          },
-  //        })
-  //        return events
-  //      }
-  //    });
-  //}
-
-  // events from meetup api
-  getEventsFor = (group) => {
-    return axios.get(apiRoot + '/events/' + group)
-      .then(response => {
-        const data = response.data;
-        const events = [];
-        if (!data.length) return [];
-        for (let i = 0; i < data.length; i++) {
-          const event = data[i];
-          const start = moment(event.start.dateTime);
-          const end = moment(event.end.dateTime);
-          events.push({
-            start: new Date(start),
-            end: new Date(end),
-            title: event.title,
-            location: event.location,
-            link: event.link,
-            groupName: event.groupName,
-          })
-        }
-        console.log(events);
-        return events
-      })
-      .catch(err => [])
   }
 
   componentDidMount = () => {
     this.setState({
       events: []
     })
-    this.groups().then(groups => {
-      const groupIds = groups.map(x => x.id);
-      let requests = groupIds.map(this.getEventsFor)
-      Promise.all(requests)
-        .then(eventsArrays => {
-          console.log(eventsArrays);
-          let allEvents = eventsArrays.reduce((a, b) => a.concat(b))
-          allEvents = allEvents.concat(hardcodeEvents);
-          this.setState({ events: allEvents });
-        })
-    })
+    events.listEvents()
+      .then(eventsArray => {
+          this.setState({ events: eventsArray });
+
+      })
+  }
+
+  openGCal = () => {
+    window.open('https://calendar.google.com/calendar/embed?src=ab5hq91hf260porloh3efsmsi8%40group.calendar.google.com&ctz=America%2FEdmonton')
   }
 
   render() {
     return (
       <div className='m-2'>
-        <h2>Upcoming Events</h2>
-        <div className="mt-2">
-          <Calendar
-            localizer={localizer}
-            defaultDate={new Date()}
-            defaultView={isMobile ? "agenda" : "month"}
-            views={['month', 'week', 'agenda']}
-            events={this.state.events}
-            components={{
-              month: { event: CalendarEvent },
-              week: { event: CalendarEvent },
-              agenda: { event: AgendaEvent },
-            }}
-            style={{ height: "75vh" }}
-          />
-        </div>
+        <Container fluid={true}>
+          <h2>Upcoming Events</h2>
+          <div className="mt-2">
+            <Calendar
+              localizer={localizer}
+              defaultDate={new Date()}
+              defaultView={isMobile ? "agenda" : "month"}
+              views={['month', 'week', 'agenda']}
+              events={this.state.events}
+              components={{
+                month: { event: CalendarEvent },
+                week: { event: CalendarEvent },
+                agenda: { event: AgendaEvent },
+              }}
+              style={{ height: "75vh" }}
+            />
+          </div>
+            <div className='mt-2'>
+              <Row noGutters={true}>
+                <a style={{marginLeft: '12px'}} href='https://calendar.google.com/calendar/ical/ab5hq91hf260porloh3efsmsi8%40group.calendar.google.com/public/basic.ics'><span><FontAwesomeIcon icon={faCalendar} size="md" /></span> iCal Link </a>
+              </Row>
+              <Row noGutters={true}>
+                <Button onClick={this.openGCal} outline color='primary'><FontAwesomeIcon icon={faCalendar} size="md" /> Open in Google Calendar </Button>
+              </Row>
+              {/* <i style={{fontSize:'24px'}} className="fa">&#xf073;</i> */}
+              {/* <button style="font-size:24px">Button <i class="fa fa-calendar"></i></button> */}
+            </div>
+        </Container>
       </div>
     );
   }
