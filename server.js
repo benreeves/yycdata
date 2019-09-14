@@ -101,8 +101,20 @@ router.get('/groups', (req, res) => {
 
 function extractEventLinkFromDesccription(description) {
     const regex = /(https?:\/\/([a-zA-Z\d-]+\.){0,}meetup\.com(\/.*)?)/
-    const result = description.match(regex);
-    return result[0]
+    let result = description.match(regex);
+    if(result) {
+        return result[0];
+    }
+    const backupRegex = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+    result = description.match(backupRegex);
+    if(result) {
+        return result[0];
+    }
+    else {
+        return null;
+    }
+
+
 }
 
 // old meetup api
@@ -157,10 +169,11 @@ router.get('/events/:groupId', (req, res) => {
 router.get('/events', (req, res) => {
     getGoogleCalendarEvents(sharedCalendarId)
         .then(events => {
-            for (let x of events) {
-                x.groupName = group.name;
-            }
             res.json(events)
+        })
+        .catch(err =>  {
+            console.log(err);
+            res.status(500).json(err)
         })
 
 })
