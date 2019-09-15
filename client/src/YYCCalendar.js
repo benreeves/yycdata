@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import environment from './environment';
 import Calendar from 'react-big-calendar'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import './YYCCalendar.css';
-import hardcodeEvents from './hardcode-events';
 import moment from 'moment'
 import { isMobile } from 'react-device-detect';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Container } from 'reactstrap';
@@ -12,20 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import events from './services/events-service'
 
-const apiRoot = environment.apiRoot;
-
 const localizer = Calendar.momentLocalizer(moment)
 
-// class EventSpec {
-//   constructor(title, venue, group, start, end, link) {
-//     this.title = title;
-//     this.venue = venue;
-//     this.group = group;
-//     this.start = start;
-//     this.end = end;
-//     this.link = link;
-//   }
-// }
 
 class Event extends Component {
   constructor(event) {
@@ -82,11 +67,13 @@ class CalendarEvent extends Event {
 class AgendaEvent extends Event {
   render = () => {
     return (
-      <div onClick={(e) => this.handleClick(e)}>
-        <b>{this.state.event.title}</b>
-        <div>Presented by: <span><b>{this.state.event.groupName}</b></span></div>
-        <div>Location: <span><b>{this.state.event.location}</b></span></div>
-        <div><Button outline color="primary" size="sm" onClick={this.openLink}>Link</Button></div>
+      <div className="yyc-agenda-event">
+        <div onClick={(e) => this.handleClick(e)}>
+          <b>{this.state.event.title}</b>
+          <div>Presented by: <span><b>{this.state.event.groupName}</b></span></div>
+          <div>Location: <span><b>{this.state.event.location}</b></span></div>
+          <div><Button outline color="primary" size="sm" onClick={this.openLink}>Link</Button></div>
+        </div>
       </div>
     )
   }
@@ -127,6 +114,11 @@ class YYCCalendar extends Component {
               defaultDate={new Date()}
               defaultView={isMobile ? "agenda" : "month"}
               views={['month', 'week', 'agenda']}
+              formats={{
+                agendaTimeRangeFormat: ({ start, end }) => {
+                  return (moment(start).format('h:mm') + '-' + moment(end).format('h:mm A'));
+                }
+              }}
               events={this.state.events}
               components={{
                 month: { event: CalendarEvent },
@@ -136,16 +128,16 @@ class YYCCalendar extends Component {
               style={{ height: "75vh" }}
             />
           </div>
-            <div className='mt-2'>
-              <Row noGutters={true}>
-                <a style={{marginLeft: '12px'}} href='https://calendar.google.com/calendar/ical/ab5hq91hf260porloh3efsmsi8%40group.calendar.google.com/public/basic.ics'><span><FontAwesomeIcon icon={faCalendar} size="md" /></span> iCal Link </a>
-              </Row>
-              <Row noGutters={true}>
-                <Button onClick={this.openGCal} outline color='primary'><FontAwesomeIcon icon={faCalendar} size="md" /> Open in Google Calendar </Button>
-              </Row>
-              {/* <i style={{fontSize:'24px'}} className="fa">&#xf073;</i> */}
-              {/* <button style="font-size:24px">Button <i class="fa fa-calendar"></i></button> */}
-            </div>
+          <div className='mt-2'>
+            <Row noGutters={true}>
+              <a style={{ marginLeft: '12px' }} href='https://calendar.google.com/calendar/ical/ab5hq91hf260porloh3efsmsi8%40group.calendar.google.com/public/basic.ics'><span><FontAwesomeIcon icon={faCalendar} size="md" /></span> iCal Link </a>
+            </Row>
+            <Row noGutters={true}>
+              <Button onClick={this.openGCal} outline color='primary'><FontAwesomeIcon icon={faCalendar} size="md" /> Open in Google Calendar </Button>
+            </Row>
+            {/* <i style={{fontSize:'24px'}} className="fa">&#xf073;</i> */}
+            {/* <button style="font-size:24px">Button <i class="fa fa-calendar"></i></button> */}
+          </div>
         </Container>
       </div>
     );
