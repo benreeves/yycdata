@@ -69,24 +69,6 @@ class Members extends Component {
                     <div className="col-lg-4 col-xl-3 mb-5">
                         <div className="card h-100">
                             <div className="meetup-img-card-wrapper">
-                                <img className="card-img-top meetup-img" src="/ADALogo.jpg" alt="" />
-                            </div>
-                            <div className="card-body">
-                                <h4 className="card-title">Alberta Data Architecture</h4>
-                                <p className="card-text">
-                                Alberta Data Architecture (ADA) meets regularly to discuss all things data - architecture,
-                                 analysis, modeling, technologies, etc. Our format is interactive, with a few brief contributions 
-                                 by experts/practitioners, followed by an interactive discussion between contributors and attendees.
-                                </p>
-                            </div>
-                            <div className="card-footer">
-                                <Button color="primary" onClick={() => this.openLink("http://albertadataarchitecture.org/")}>Find Out More!</Button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-xl-3 mb-5">
-                        <div className="card h-100">
-                            <div className="meetup-img-card-wrapper">
                                 <img className="card-img-top meetup-img" src="/DAMALogo.png" alt="" />
                             </div>
                             <div className="card-body">

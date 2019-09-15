@@ -24,3 +24,8 @@
   margin: auto;
   background: white;
 }
+
+@media only screen and (max-width: 900px) {
+  /* For desktop: */
+  .yyc-agenda-event {font-size: 8pt;}
+}

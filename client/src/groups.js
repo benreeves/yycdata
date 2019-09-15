@@ -72,9 +72,16 @@ const groups =
             "shortDescription": `CivicTechYYC is a community based group that is part of a global movement to 
             leverage technology for public good. We are passionate volunteers who come together
             to conceptualize and engage on projects that serve to make Calgary an even better
-            place to live.,
+            place to live.`,
             "url": "https://www.meetup.com/CivicTechYYC-Tech-for-Good/"
-`
+        },
+        {
+            "id": "Alberta-Data-Architecture-Meetup-Group",
+            "name": "Alberta Data Architecure",
+            'image': 'https://secure.meetupstatic.com/photos/event/6/5/9/f/highres_484466015.jpeg',
+            "shortDescription": `The Alberta Data Architecture (ADA) Community is an informal organization of data professionals that meet
+             regularly to discuss matters of interest to the data community, and to network with like-minded individuals.`,
+            "url": "http://albertadataarchitecture.org/"
         }
     ]
 
