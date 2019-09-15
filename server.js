@@ -182,8 +182,6 @@ router.get('/opportunities', (req, res) => {
 router.post('/opportunities', (req, res) => {
     const opp = req.body;
     if (opp.moderatorPassword !== MODERATOR_PASSWORD) {
-        console.log(opp);
-        console.log(MODERATOR_PASSWORD);
         res.status(400).send("Not authorized")
         return;
     }
@@ -198,6 +196,7 @@ router.post('/opportunities', (req, res) => {
         if(err != null) {
             console.log(err)
             res.status(500).json(err)
+            return;
         }
         res.json({success: true});
     })
@@ -205,21 +204,18 @@ router.post('/opportunities', (req, res) => {
 
 router.delete('/opportunities/:id', (req, res) => {
     const opp = req.body;
-    console.log(opp);
-    console.log(MODERATOR_PASSWORD)
     if (opp.moderatorPassword !== MODERATOR_PASSWORD) {
         res.status(400).send("Not authorized")
         return;
     }
     const id = new mongo.ObjectID(req.params.id);
-    console.log(id)
     const collection = db.collection('opportunities');
     collection.deleteOne({_id: id}, (err, mongoRes) => {
         if(err != null) {
             console.log(err)
             res.status(500).json(err)
+            return;
         }
-        console.log(mongoRes);
         res.json({success: true});
     })
 })

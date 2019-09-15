@@ -107,7 +107,6 @@ class OpportunityBoard extends React.Component {
                 else {
                     console.log(err);
                     alert('Oh no a bug. Try again then hit Ben up.');
-                    this.toggle();
                 }
             });
             
