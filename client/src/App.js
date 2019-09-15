@@ -79,9 +79,9 @@ class AppRouter extends React.Component {
                 <NavItem>
                   <NavLink href="/calendar">Calendar</NavLink>
                 </NavItem>
-                {/* <NavItem>
+                <NavItem>
                   <NavLink href="/opportunities">Opportunities</NavLink>
-                </NavItem> */}
+                </NavItem>
                 <NavItem>
                   <NavLink href="/about">About</NavLink>
                 </NavItem>

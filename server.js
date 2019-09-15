@@ -11,12 +11,14 @@ Request = require('request'),
 path = require('path'),
 MEETUP_API_BASE_URL = 'https://api.meetup.com',
 MEETUP_API_KEY = process.env.MEETUP_API_KEY,     // From environment variable
-MODERATOR_PASSSWORD = process.env.MODERATOR_PASWORD,
+MODERATOR_PASSWORD = process.env.MODERATOR_PASSWORD,
 YYC_CONNECTION_STRING = process.env.YYC_CONNECTION_STRING,
 GROUPS = require('./groups.json');
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
-console.log(YYC_CONNECTION_STRING)
+if(!MODERATOR_PASSWORD) {
+    throw Error('No moderator password')
+}
 // configure mongo
 const MongoClient = mongo.MongoClient;
 const dbname = "yycdata";
@@ -75,17 +77,6 @@ function getGoogleCalendarEvents(calendarId) {
 }
 
 
-//Creates a secondary calendar       
-//api.calendars.insert({requestBody : { summary : "test2"}},
-//     function (err, res) {
-//         if(err) {
-//             console.log(err);
-//         } else {
-//             console.log(res);
-//         }
-//     })
-
-// Make an authorized request to list Calendar events.
 
 // Check if a group is valid and return group
 function isValid(groupId) {
@@ -184,15 +175,17 @@ router.get('/opportunities', (req, res) => {
 
     const collection = db.collection('opportunities');
     collection.find({}).toArray(function (err, docs) {
-        console.log(docs)
         res.json(docs)
     });
 })
 
 router.post('/opportunities', (req, res) => {
     const opp = req.body;
-    if (opp.moderatorPasword != MODERATOR_PASSSWORD) {
+    if (opp.moderatorPassword !== MODERATOR_PASSWORD) {
+        console.log(opp);
+        console.log(MODERATOR_PASSWORD);
         res.status(400).send("Not authorized")
+        return;
     }
     const toInsert = {
         title: opp.title,
@@ -201,7 +194,7 @@ router.post('/opportunities', (req, res) => {
         id: uuidv1()
     }
     const collection = db.collection('opportunities');
-    collection.insert(toInsert, (err, mongoRes) => {
+    collection.insertOne(toInsert, (err, mongoRes) => {
         if(err != null) {
             console.log(err)
             res.status(500).json(err)
@@ -210,6 +203,26 @@ router.post('/opportunities', (req, res) => {
     })
 })
 
+router.delete('/opportunities/:id', (req, res) => {
+    const opp = req.body;
+    console.log(opp);
+    console.log(MODERATOR_PASSWORD)
+    if (opp.moderatorPassword !== MODERATOR_PASSWORD) {
+        res.status(400).send("Not authorized")
+        return;
+    }
+    const id = new mongo.ObjectID(req.params.id);
+    console.log(id)
+    const collection = db.collection('opportunities');
+    collection.deleteOne({_id: id}, (err, mongoRes) => {
+        if(err != null) {
+            console.log(err)
+            res.status(500).json(err)
+        }
+        console.log(mongoRes);
+        res.json({success: true});
+    })
+})
 
 router.get('/events', (req, res) => {
     getGoogleCalendarEvents()
