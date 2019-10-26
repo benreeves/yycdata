@@ -1,0 +1,19 @@
+{
+    "sponsorships": [
+	{
+	    "name": "Cenovus Energy",
+	    "logoURL": "cenovus.png",
+	    "sponsorURL": "https://www.cenovus.com/"
+	},
+	{
+	    "name": "Pacific Institute for the Mathematical Sciences",
+	    "logoURL": "pims.png",
+	    "sponsorURL": "https://www.pims.math.ca/"
+	},
+	{
+	    "name": "Viewpoint Investment Partners",
+	    "logoURL": "viewpoint_logo.png",
+	    "sponsorURL": "https://www.viewpointinvestment.ca/"
+	}
+    ]
+}

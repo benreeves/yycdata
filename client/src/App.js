@@ -12,6 +12,7 @@ import './App.css';
 import Members from './Members'
 import About from './About'
 import OpportunitiesPage from './Opportunities';
+import Sponsorship from './Sponsorship.js';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -70,7 +71,7 @@ class AppRouter extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <div >
           <Navbar color="dark" dark expand="md" className="yyc-red">
             <NavbarBrand href="/">YYC Data Collective</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
@@ -88,6 +89,9 @@ class AppRouter extends React.Component {
                 <NavItem>
                   <NavLink href="/members">Members</NavLink>
                 </NavItem>
+		<NavItem>
+		  <NavLink href="/sponsorships">Sponsorships</NavLink>
+		</NavItem>
               </Nav>
             </Collapse>
           </Navbar>
@@ -98,6 +102,7 @@ class AppRouter extends React.Component {
             <Route path="/about" component={About} />
             <Route path="/groups" component={Groups} />
             <Route path="/members" component={Members} />
+	    <Route path="/sponsorships" component={Sponsorship} />
           </div>
         </div>
       </Router>
